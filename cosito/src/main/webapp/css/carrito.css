@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+
+.logoSale {
+	z-index: 1;
+	margin-top: 28px;
+	margin-left: -23px !important;
+}
+
+.logoSale img {
+	width: 134px !important;
+}
+
+#list5 {
+	border-radius: 7px;	
+	background-color: #32363A;
+	box-shadow: 1px 1px 2px #FFF;
+}
+
+#list5 ol {
+	font-size: 18px;
+	-webkit-font-size: 18px;
+	text-align: left !important;
+	list-style-type: circle;
+	text-align: left !important;
+}
+
+#list5 ol li {
+	
+}
+
+#list5 ol li ol {
+	list-style-image: url("../images/registro/nested.png");
+	padding: 5px 0 5px 18px;
+	font-size: 15px;
+}
+
+#list5 ol li ol li {
+	color: #rgba(99, 186, 227, 1) !important;
+	height: 15px;
+	margin-left: 1px;
+}
+
+.infoUsuario {
+	color: white;
+}
+
+.infoUsuario a:visited {
+	color: #428BCA;
+}
+
+.infoUsuario a:link {
+	color: #428BCA;
+}
+
+.columnas {
+	background-color: #32363A;
+	box-shadow: 1px 1px 4px #FFF;
+}
+
+.columnas div {
+	width: 170px;
+	display: inline-block;
+	color: white;
+}
+
+.data {
+	background-color: #32363A;
+	box-shadow: 1px 1px 4px #FFF;
+}
+.data div
+{
+	width: 170px;
+	display: inline-block;
+	color: white;
+}
