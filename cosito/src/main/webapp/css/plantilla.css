@@ -101,11 +101,12 @@ section{
 }
 .agregarSeccion{
     cursor: pointer;
-    position: fixed;
+    position:fixed;
 }
 .eliminarSeccion{
-    cursor: pointer;
-    position: fixed;
     margin-left: 80px;
     margin-top: 20px;
+}
+.eliminarSeccion img{
+	cursor: pointer;
 }
