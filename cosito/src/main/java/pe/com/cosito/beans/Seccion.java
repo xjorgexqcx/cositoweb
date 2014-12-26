@@ -2,19 +2,16 @@ package pe.com.cosito.beans;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="secciones")
-public class Secciones implements Serializable{
+public class Seccion implements Serializable{
 
 	/**
 	 * 
@@ -23,7 +20,7 @@ public class Secciones implements Serializable{
 	
 	private int id;
 	private String nombre;
-	private Imagenes idImagen;
+	private int idImagen;
 	private int estado;
 	
 	@Id
@@ -41,13 +38,10 @@ public class Secciones implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id")
-	public Imagenes getIdImagen() {
+	public int getIdImagen() {
 		return idImagen;
 	}
-	public void setIdImagen(Imagenes idImagen) {
+	public void setIdImagen(int idImagen) {
 		this.idImagen = idImagen;
 	}
 	public int getEstado() {
@@ -56,4 +50,5 @@ public class Secciones implements Serializable{
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+
 }
