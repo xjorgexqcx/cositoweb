@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,6 @@ public class Secciones implements Serializable{
 	private int estado;
 	
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {
 		return id;
@@ -42,8 +42,6 @@ public class Secciones implements Serializable{
 		this.nombre = nombre;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id")
 	public Imagenes getIdImagen() {
 		return idImagen;
 	}

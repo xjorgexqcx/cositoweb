@@ -70,10 +70,11 @@ public class ImagenesService {
 	}
 	public boolean imagenRepetida(String url) {
 		Imagenes img=imagenesDao.buscarPorNombre(url);
-		logger.info(url+" = "+img.getUrl());
 		if(img != null){
+			logger.info(url+" = "+img.getUrl());
 			return true;
 		}
 		return false;
 	}
+	
 }

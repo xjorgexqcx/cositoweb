@@ -46,12 +46,17 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
+		try{
 		List<Secciones> ltaSecciones = seccionesService.getAll();
 		model.addAttribute("ltaSecciones", ltaSecciones);
-		logger.info("Tamaño de las secciones: " + ltaSecciones.size());
 		for (Secciones sec : ltaSecciones) {
 			logger.info("Imagen de la seccion: " + sec.getNombre() + "-"
 					+ sec.getIdImagen().getId());
+		}
+		}catch(Exception ex)
+		{
+			logger.info("Error en index: "+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return "index";
 	}
@@ -112,7 +117,7 @@ public class HomeController {
 		Secciones secc = new Secciones();
 		Imagenes imgs = new Imagenes();
 		String ruta = System.getProperty("user.home")
-				+ "/git/cosito/src/main//webapp/images/secciones/upload/"
+				+ "/git/cositoweb/cosito/src/main//webapp/images/secciones/upload/"
 				+ file.getOriginalFilename();
 		// String ruta = servletRequest.getSession().getServletContext()
 		// .getRealPath("/")+ "/images/secciones/upload/" +
@@ -153,6 +158,7 @@ public class HomeController {
 				model.addAttribute("banner", "images/success-banner.jpg");
 				File is = new File(imgs.getUrl());
 				file.transferTo(is);
+				image = ImageIO.read(is);
 				image = ImageIO.read(is);
 			}
 			if (rpta1 <= 0) {
