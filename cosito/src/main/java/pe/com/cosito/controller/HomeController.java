@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pe.com.cosito.beans.Contenidos;
 import pe.com.cosito.beans.Imagenes;
 import pe.com.cosito.beans.Secciones;
+import pe.com.cosito.service.ContenidosService;
 import pe.com.cosito.service.ImagenesService;
 import pe.com.cosito.service.SeccionesService;
 
@@ -43,19 +45,20 @@ public class HomeController {
 	private SeccionesService seccionesService;
 	@Autowired
 	private ImagenesService imagenesService;
+	@Autowired
+	private ContenidosService contenidosService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		try{
-		List<Secciones> ltaSecciones = seccionesService.getAll();
-		model.addAttribute("ltaSecciones", ltaSecciones);
-		for (Secciones sec : ltaSecciones) {
-			logger.info("Imagen de la seccion: " + sec.getNombre() + "-"
-					+ sec.getIdImagen().getId());
-		}
-		}catch(Exception ex)
-		{
-			logger.info("Error en index: "+ex.getMessage());
+		try {
+			List<Secciones> ltaSecciones = seccionesService.getAll();
+			model.addAttribute("ltaSecciones", ltaSecciones);
+			for (Secciones sec : ltaSecciones) {
+				logger.info("Imagen de la seccion: " + sec.getNombre() + "-"
+						+ sec.getIdImagen().getId());
+			}
+		} catch (Exception ex) {
+			logger.info("Error en index: " + ex.getMessage());
 			ex.printStackTrace();
 		}
 		return "index";
@@ -67,11 +70,6 @@ public class HomeController {
 		List<Secciones> ltaSecciones = seccionesService.getAll();
 		model.addAttribute("ltaSecciones", ltaSecciones);
 		return "index";
-	}
-
-	@RequestMapping(value = "/publicaciones", method = RequestMethod.GET)
-	public String publicaciones() {
-		return "publicaciones";
 	}
 
 	@RequestMapping(value = "/sube")
@@ -180,7 +178,7 @@ public class HomeController {
 	}
 
 	private boolean verificaImagen(String nombreImagen) {
-		String extension=FilenameUtils.getExtension(nombreImagen);
+		String extension = FilenameUtils.getExtension(nombreImagen);
 		String[] formatos = { "jpg", "png", "gif", "jpeg" };
 		boolean bandera = false;
 		for (int i = 0; i < formatos.length; i++) {
@@ -190,7 +188,7 @@ public class HomeController {
 				break;
 			}
 		}
-		logger.info("Extension : "+extension);
+		logger.info("Extension : " + extension);
 		return bandera;
 	}
 
@@ -224,5 +222,38 @@ public class HomeController {
 	public int eliminarSeccion(@RequestParam("seccion") int seccion) {
 		int rpta = seccionesService.eliminarSeccion(seccion);
 		return rpta;
+	}
+
+	@RequestMapping(value = "/generaSesion", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public int generaSesion(@RequestParam("idSeccion") String idSeccion,HttpServletRequest request, HttpSession hs) {
+		int rpta = 0;
+		try {
+			hs=request.getSession();
+			hs.setAttribute("idSeccion", idSeccion);
+			rpta = 1;
+			logger.info("Se logro generar la session con el id: "+idSeccion);
+		} catch (Exception ex) {
+			rpta = 0;
+			logger.info("/generaSession - error: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+		return rpta;
+	}
+	@RequestMapping(value = "/publicaciones", method = {RequestMethod.GET,RequestMethod.POST})
+	public String publicaciones(HttpServletRequest request,HttpSession hs,Model model) {
+		try{
+			hs = request.getSession();
+			int seccion=Integer.parseInt(hs.getAttribute("idSeccion").toString());
+			logger.info("Codigo de la seccion para contenidos"+seccion);
+			List<Contenidos> contenidos=contenidosService.buscarPorId(seccion);
+			logger.info("Cantidad obtenida en el controlador: "+contenidos.size());
+			model.addAttribute("ltaArticulos", contenidos);
+		}catch(Exception ex){
+			logger.info("/publicaciones - Error : "+ex.getMessage());
+			ex.printStackTrace();
+			return "index";
+		}
+		return "publicaciones";
 	}
 }

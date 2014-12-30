@@ -44,7 +44,7 @@ toastr.options = {
 			<div id="codigo${ltaS.id}" Style="display: inline-block;">
 				<div
 					Style="background-image: url('${ltaS.idImagen.url}') !important;"
-					id="item" onclick="redi('publicaciones.html');" class="item"
+					id="item" onclick="generaSesion('${ltaS.id}');" class="item"
 					title="${ltaS.nombre}"></div>
 				<div class="eliminarSeccion" onclick="eliminar(${ltaS.id});">
 					<img alt="eliminar Seccion" src="images/delete.png" />

@@ -61,3 +61,22 @@ function eliminaSeccion() {
 		toastr.error("Lo sentimos, Tuvimos problemas para desactivar la seccion");
 	}
 }
+function generaSesion(idSeccion){
+	var data = "idSeccion=" + encodeURIComponent(idSeccion);	
+	peticion = inicializa_xhr();
+	peticion.onreadystatechange = rptaGeneraSesion;
+	peticion.open("POST", "generaSesion", true);
+
+	peticion.setRequestHeader("Content-Type",
+			"application/x-www-form-urlencoded");
+	peticion.send(data);
+}
+function rptaGeneraSesion(){
+	var rpta = peticion.responseText;	
+	if (rpta == "1") {
+		location.href="publicaciones";
+	}
+	if (rpta == "0") {
+		toastr.error("Lo sentimos, Tuvimos problemas para acceder a la seccion");
+	}
+}
