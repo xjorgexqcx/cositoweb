@@ -137,12 +137,3 @@ section {
 .eliminarSeccion img {
 	cursor: pointer;
 }
-
-.back img {
-	position: fixed;
-	width: 205px;
-	height: 85px;
-	margin-left: 50px;
-	margin-top: -20px;
-	z-index: 2;
-}

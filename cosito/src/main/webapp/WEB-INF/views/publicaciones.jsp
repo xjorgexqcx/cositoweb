@@ -1,6 +1,8 @@
 <%@ include file="home.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<link href='http://fonts.googleapis.com/css?family=Dancing+Script:700'
+	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="css/publicaciones.css">
 
 <section>
@@ -13,10 +15,11 @@
 			src="images/back.png" /></a>
 	</div>
 	<div class="publicaciones">
+		<h1>Cosito Dice</h1>
 		<c:forEach items="${ltaArticulos}" var="articulo">
-			<div  class="subPublicaciones" style="${articulo.estilo}">
-			<h2>${articulo.nombre}</h2>
-			<p>${articulo.descripcion}</p>
+			<div class="subPublicaciones" style="${articulo.estilo}">
+				<h2>${articulo.nombre}</h2>
+				<p>${articulo.descripcion}</p>
 			</div>
 		</c:forEach>
 	</div>

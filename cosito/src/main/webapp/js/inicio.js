@@ -9,7 +9,6 @@ function inicializa_xhr() {
 		return new ActiveXObject("Microsoft.XMLHTTP");
 	}
 }
-
 function redi(uri) {
 	window.location.href = uri;
 }
@@ -79,4 +78,7 @@ function rptaGeneraSesion(){
 	if (rpta == "0") {
 		toastr.error("Lo sentimos, Tuvimos problemas para acceder a la seccion");
 	}
+}
+function obtieneInformaciones(id){
+	
 }
